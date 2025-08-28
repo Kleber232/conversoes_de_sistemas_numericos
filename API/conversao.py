@@ -61,6 +61,72 @@ conversao.OctalDecimal.restype = ctypes.c_int
 conversao.OctalBinario.argtypes = [ctypes.c_int]
 conversao.OctalBinario.restype = ctypes.c_int
 
-# Exemplo de uso:
-if __name__ == "__main__":
-    print(conversao.dec_bin(10).decode())  # Exemplo: binário de 10
+__all__ = ["decbin_part_frac", 
+           "dec_bin", 
+           "parteint",
+           "partfrac",
+           "ler_binario",
+           "adicaobin",
+           "subtracaobin",
+           "multibin",
+           "divbin",
+           "DecimalOctal",
+           "OctalDecimal",
+           "OctalBinario"
+           ]
+
+def decbin_part_frac(num: float) -> str:
+    return conversao.decbin_part_frac(ctypes.c_float(num)).decode()
+
+def dec_bin(num: int) -> str:
+    return conversao.dec_bin(ctypes.c_int(num)).decode()
+
+def parteint(bits: list[int]) -> float:
+    arr = (ctypes.c_int * len(bits))(*bits)
+    return conversao.parteint(arr, len(bits))
+
+def partfrac(bits: list[int]) -> float:
+    arr = (ctypes.c_int * len(bits))(*bits)
+    return conversao.partfrac(arr, len(bits))
+
+def ler_binario(parte_int: list[int], parte_frac: list[int]):
+    arr_int = (ctypes.c_int * len(parte_int))(*parte_int)
+    arr_frac = (ctypes.c_int * len(parte_frac))(*parte_frac)
+    return conversao.ler_binario(arr_int, len(arr_int),  arr_frac, len(arr_frac))
+
+def adicaobin(pi1, pf1, pi2, pf2):
+    arr_pi1 = (ctypes.c_int * len(pi1))(*pi1)
+    arr_pf1 = (ctypes.c_int * len(pf1))(*pf1)
+    arr_pi2 = (ctypes.c_int * len(pi2))(*pi2)
+    arr_pf2 = (ctypes.c_int * len(pf2))(*pf2)
+    return conversao.adicaobin(arr_pi1, len(pi1), arr_pf1, len(pf1), arr_pi2, len(pi2), arr_pf2, len(pf2))
+
+def subtracaobin(pi1, pf1, pi2, pf2):
+    arr_pi1 = (ctypes.c_int * len(pi1))(*pi1)
+    arr_pf1 = (ctypes.c_int * len(pf1))(*pf1)
+    arr_pi2 = (ctypes.c_int * len(pi2))(*pi2)
+    arr_pf2 = (ctypes.c_int * len(pf2))(*pf2)
+    return conversao.subtracaobin(arr_pi1, len(pi1), arr_pf1, len(pf1), arr_pi2, len(pi2), arr_pf2, len(pf2))
+
+def multibin(pi1, pf1, pi2, pf2):
+    arr_pi1 = (ctypes.c_int * len(pi1))(*pi1)
+    arr_pf1 = (ctypes.c_int * len(pf1))(*pf1)
+    arr_pi2 = (ctypes.c_int * len(pi2))(*pi2)
+    arr_pf2 = (ctypes.c_int * len(pf2))(*pf2)
+    return conversao.multibin(arr_pi1, len(pi1), arr_pf1, len(pf1), arr_pi2, len(pi2), arr_pf2, len(pf2))
+
+def divbin(pi1, pf1, pi2, pf2):
+    arr_pi1 = (ctypes.c_int * len(pi1))(*pi1)
+    arr_pf1 = (ctypes.c_int * len(pf1))(*pf1)
+    arr_pi2 = (ctypes.c_int * len(pi2))(*pi2)
+    arr_pf2 = (ctypes.c_int * len(pf2))(*pf2)
+    return conversao.divbin(arr_pi1, len(pi1), arr_pf1, len(pf1), arr_pi2, len(pi2), arr_pf2, len(pf2))
+
+def DecimalOctal(num: int) -> int:
+    return conversao.DecimalOctal(ctypes.c_int(num))
+
+def OctalDecimal(num: int) -> int:
+    return conversao.OctalDecimal(ctypes.c_int(num))
+
+def OctalBinario(num: int) -> int:
+    return conversao.OctalBinario(ctypes.c_int(num))
