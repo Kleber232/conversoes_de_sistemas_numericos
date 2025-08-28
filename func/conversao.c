@@ -153,3 +153,26 @@ CONVERSAO_EXPORT int OctalDecimal(int valorOctal)
     }
     return valorDecimalFinal;
 }
+
+CONVERSAO_EXPORT int OctalBinario(int valorOctal)
+{
+    int decimal = 0, binario = 0, base = 1;
+
+    // Primeiro converte octal para decimal
+    int temp = valorOctal, i = 0;
+    while (temp != 0) {
+        decimal += (temp % 10) * pow(8, i);
+        temp /= 10;
+        i++;
+    }
+
+    // Agora converte decimal para binário
+    i = 1;
+    while (decimal != 0) {
+        binario += (decimal % 2) * i;
+        decimal /= 2;
+        i *= 10;
+    }
+
+    return binario;
+}
